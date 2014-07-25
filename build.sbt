@@ -11,8 +11,7 @@ scalaVersion := "2.11.2"
 // Dependencies
 
 libraryDependencies ++= Seq(
-    cache,
-    "org.mongojack" % "mongojack" % "2.0.0-RC5",
+    "org.mongojack" % "mongojack" % "2.0.0",
     "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.4.1",
     "com.typesafe.play" %% "play" % "2.3.2" % "provided"
 )
