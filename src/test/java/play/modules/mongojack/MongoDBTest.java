@@ -1,18 +1,19 @@
 package play.modules.mongojack;
 
-import org.junit.Test;
-import org.mongojack.JacksonDBCollection;
-import play.modules.mongojack.KeyTyped;
-import play.modules.mongojack.MongoDB;
-import play.test.FakeApplication;
-
-import javax.persistence.Id;
-import java.util.*;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.running;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import org.junit.Test;
+import org.mongojack.JacksonDBCollection;
+import org.mongojack.ObjectId;
+
+import play.test.FakeApplication;
 
 public class MongoDBTest {
     @Test
@@ -36,7 +37,7 @@ public class MongoDBTest {
     }
 
     public class MockObject implements KeyTyped<String> {
-        @Id
+    	@ObjectId
         public String id;
     }
 }

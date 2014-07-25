@@ -80,7 +80,7 @@ case class MongoDBSpec() extends Specification {
     }
 
     "be able to map scala classes" in new Setup {
-      implicit val app = fakeApp(Map.empty)
+      implicit val app = fakeApp(Map("mongodb.servers" -> "localhost:27017"))
       running(app) {
         val coll = MongoDB.collection(collName, classOf[MockObject], classOf[String])
         val obj = new MockObject("someid", List("one", "two", "three"))
@@ -178,7 +178,7 @@ case class MongoDBSpec() extends Specification {
 
 class MockObject(@Id val id: String,
                  @JsonProperty("values") @BeanProperty val values: List[String]) {
-  @Id def getId = id;
+  @Id @JsonProperty("_id") def getId = id;
 }
 
 class MockGlobalConfigurer extends ObjectMapperConfigurer {
@@ -197,10 +197,10 @@ class MockPerCollectionConfigurer extends ObjectMapperConfigurer {
 
 @MongoCollection(name = "blah")
 class MockAnnotatedObject(@Id val id: String) {
-  @Id def getId = id;
+  @Id @JsonProperty("_id") def getId = id;
 }
 
-class MockDocument(@Id val id: java.lang.String) extends KeyTyped[java.lang.String] {
-  @Id def getId = id;
+class MockDocument(@Id val id: String) extends KeyTyped[String] {
+  @Id @JsonProperty("_id") def getId = id;
 }
 
